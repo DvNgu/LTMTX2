@@ -7,7 +7,8 @@ byte mac[] = {0xDE,0xAD,0xBE,0xEF,0xFE,0xED};
 #define DHTTYPE DHT11  
 
 IPAddress ip(192,168,0,177);
-IPAddress myDns(192,168,0,1);
+//IPAddress myDns(192,168,0,1);
+
 EthernetClient client;
 EthernetServer server = EthernetServer(8888);
 DHT dht(DHTPIN, DHTTYPE);
@@ -23,10 +24,11 @@ void setup()
     ; // Wait for serial port to connect.
   }
   
-  Ethernet.begin(mac,ip,myDns);
+  Ethernet.begin(mac,ip/*,myDns*/);
   Serial.print("Manually assigned the following IP address to the Arduino:");
   Serial.println();
   Serial.println(Ethernet.localIP());
+  Serial.println(Ethernet.gatewayIP());
   if (Ethernet.hardwareStatus() == EthernetNoHardware)
   {
     Serial.println("Ethernet shield was not found.");
